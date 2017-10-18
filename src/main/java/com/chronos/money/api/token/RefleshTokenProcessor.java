@@ -36,16 +36,20 @@ public class RefleshTokenProcessor implements ResponseBodyAdvice<OAuth2AccessTok
     @Override
     public OAuth2AccessToken beforeBodyWrite(OAuth2AccessToken oAuth2AccessToken, MethodParameter methodParameter, MediaType mediaType, Class<? extends HttpMessageConverter<?>> aClass, ServerHttpRequest serverHttpRequest, ServerHttpResponse serverHttpResponse) {
 
-        String refleshToekn = oAuth2AccessToken.getRefreshToken().getValue();
+
 
         HttpServletRequest request =  ((ServletServerHttpRequest)serverHttpRequest).getServletRequest();
         HttpServletResponse response = ((ServletServerHttpResponse)serverHttpResponse).getServletResponse();
 
 
 
-        adicionarRefleshCookie(refleshToekn,request,response);
+
 
         DefaultOAuth2AccessToken token  = (DefaultOAuth2AccessToken)oAuth2AccessToken;
+
+        String refleshToekn = oAuth2AccessToken.getRefreshToken().getValue();
+        adicionarRefleshCookie(refleshToekn,request,response);
+
         removerRefleshTokenBody(token);
 
         return oAuth2AccessToken;
