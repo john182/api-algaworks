@@ -1,1 +1,1 @@
-web: java -Dserver.port=$PORT -Dspring.profiles.active=oauth-security,prod $JAVA_OPTS -jar target/chronosmoneyapi*.jar
+web: java -Dserver.port=$PORT -Dspring.profiles.active=oauth-security,prod $JAVA_OPTS -jar target/chronos-money-api*.jar
