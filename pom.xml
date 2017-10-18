@@ -3,13 +3,13 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.chronos.morney-api</groupId>
+    <groupId>com.chronos.money-api</groupId>
     <artifactId>chronos-money-api</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>1.0.0-SNAPSHOT</version>
     <packaging>jar</packaging>
 
     <name>chronos-money-api</name>
-    <description>Demo project for Spring Boot</description>
+    <description>Sistema desenvolvido com estudo do curso de Angular e Spring</description>
 
     <parent>
         <groupId>org.springframework.boot</groupId>
