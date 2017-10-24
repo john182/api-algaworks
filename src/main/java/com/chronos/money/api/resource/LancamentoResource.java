@@ -75,6 +75,18 @@ public class LancamentoResource {
         repository.delete(codigo);
     }
 
+
+    @PutMapping("/{codigo}")
+    @PreAuthorize("hasAuthority('ROLE_CADASTRAR_LANCAMENTO')")
+    public ResponseEntity<Lancamento> atualizar(@PathVariable Long codigo, @Valid @RequestBody Lancamento lancamento) {
+        try {
+            Lancamento lancamentoSalvo = service.atualizar(codigo, lancamento);
+            return ResponseEntity.ok(lancamentoSalvo);
+        } catch (IllegalArgumentException e) {
+            return ResponseEntity.notFound().build();
+        }
+    }
+
     @ExceptionHandler({ PesssoaInexistenteException.class })
     public ResponseEntity<Object> handlePessoaInexistenteOuInativaException(PesssoaInexistenteException ex) {
 

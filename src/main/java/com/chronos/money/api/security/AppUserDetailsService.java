@@ -29,7 +29,7 @@ public class AppUserDetailsService implements UserDetailsService {
 
         Optional<Usuario> usuarioOptional = repository.findByEmail(email);
         Usuario usuario = usuarioOptional.orElseThrow(()->new UsernameNotFoundException("Usuário e senha invalido"));
-        return new User(email,usuario.getSenha(),getPermissoes(usuario));
+        return new UsuarioSistema(usuario,getPermissoes(usuario));
 
     }
 

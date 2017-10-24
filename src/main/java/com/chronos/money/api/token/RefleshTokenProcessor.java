@@ -2,6 +2,7 @@ package com.chronos.money.api.token;
 
 import com.chronos.money.api.config.properties.ApiProperty;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Profile;
 import org.springframework.core.MethodParameter;
 import org.springframework.http.MediaType;
 import org.springframework.http.converter.HttpMessageConverter;
@@ -22,6 +23,7 @@ import javax.servlet.http.HttpServletResponse;
 /**
  * Created by john on 16/10/17.
  */
+@Profile("oauth-security")
 @ControllerAdvice
 public class RefleshTokenProcessor implements ResponseBodyAdvice<OAuth2AccessToken> {
 
@@ -34,7 +36,7 @@ public class RefleshTokenProcessor implements ResponseBodyAdvice<OAuth2AccessTok
     }
 
     @Override
-    public OAuth2AccessToken beforeBodyWrite(OAuth2AccessToken oAuth2AccessToken, MethodParameter methodParameter, MediaType mediaType, Class<? extends HttpMessageConverter<?>> aClass, ServerHttpRequest serverHttpRequest, ServerHttpResponse serverHttpResponse) {
+    public OAuth2AccessToken beforeBodyWrite(OAuth2AccessToken body, MethodParameter returnType, MediaType mediaType, Class<? extends HttpMessageConverter<?>> aClass, ServerHttpRequest serverHttpRequest, ServerHttpResponse serverHttpResponse) {
 
 
 
@@ -42,17 +44,14 @@ public class RefleshTokenProcessor implements ResponseBodyAdvice<OAuth2AccessTok
         HttpServletResponse response = ((ServletServerHttpResponse)serverHttpResponse).getServletResponse();
 
 
+        DefaultOAuth2AccessToken token  = (DefaultOAuth2AccessToken)body;
 
-
-
-        DefaultOAuth2AccessToken token  = (DefaultOAuth2AccessToken)oAuth2AccessToken;
-
-        String refleshToekn = oAuth2AccessToken.getRefreshToken().getValue();
+        String refleshToekn = body.getRefreshToken().getValue();
         adicionarRefleshCookie(refleshToekn,request,response);
 
         removerRefleshTokenBody(token);
 
-        return oAuth2AccessToken;
+        return body;
     }
 
     private void removerRefleshTokenBody(DefaultOAuth2AccessToken token) {
