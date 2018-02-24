@@ -27,12 +27,12 @@ public class RefleshTokenCookiePreProcessorFilter implements Filter {
         HttpServletRequest req = (HttpServletRequest)request;
 
         if("/oauth/token".equalsIgnoreCase(req.getRequestURI())
-                && "reflesh_token".equals(req.getParameter("grant_type"))
+                && "refresh_token".equals(req.getParameter("grant_type"))
                 && req.getCookies()!=null){
 
 
             for(Cookie cookie : req.getCookies()){
-                if(cookie.getName().equals("refleshToken")){
+                if(cookie.getName().equals("refreshToken")){
                     String refleshToken = cookie.getValue();
                     req = new MyServletRequestWrapper(req,refleshToken);
                     break;
@@ -66,7 +66,7 @@ public class RefleshTokenCookiePreProcessorFilter implements Filter {
         @Override
         public Map<String, String[]> getParameterMap() {
             ParameterMap<String,String[]> map = new ParameterMap<>(getRequest().getParameterMap());
-            map.put("refleshToken",new String[]{refleshToken});
+            map.put("refresh_token",new String[]{refleshToken});
             map.setLocked(true);
             return map;
         }

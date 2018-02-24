@@ -35,6 +35,7 @@ public class BasicSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
                 .antMatchers("/posts").permitAll()
+                .antMatchers("/logradouros").permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .httpBasic()

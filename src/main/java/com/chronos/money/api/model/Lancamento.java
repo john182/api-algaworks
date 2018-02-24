@@ -21,10 +21,10 @@ public class Lancamento {
     private String descricao;
 
     @NotNull
-    @JsonFormat(pattern = "dd-MM-yyyy")
+   // @JsonFormat(pattern = "dd-MM-yyyy")
     @Column(name = "data_vencimento")
     private LocalDate dataVencimento;
-    @JsonFormat(pattern = "dd-MM-yyyy")
+   // @JsonFormat(pattern = "dd-MM-yyyy")
     @Column(name = "data_pagamento")
     private LocalDate dataPagamento;
 

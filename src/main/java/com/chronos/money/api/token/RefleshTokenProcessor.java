@@ -59,7 +59,7 @@ public class RefleshTokenProcessor implements ResponseBodyAdvice<OAuth2AccessTok
     }
 
     private void adicionarRefleshCookie(String refleshToekn, HttpServletRequest request, HttpServletResponse response) {
-        Cookie cookie = new Cookie("refleshToken",refleshToekn);
+        Cookie cookie = new Cookie("refreshToken",refleshToekn);
         cookie.setHttpOnly(true);
 
         cookie.setSecure(apiProperty.getSeguranca().isEnableHttps());

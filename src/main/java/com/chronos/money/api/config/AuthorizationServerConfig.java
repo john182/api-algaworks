@@ -37,11 +37,11 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
 
         clients.inMemory()
                 //usuario e senha do cliente( da aplicação que está fazendo a requisição)
-                .withClient("angula").secret("@ngul@")
+                .withClient("angular").secret("@ngul@r0")
                 // escopo usado para o acesso a api
                 .scopes("read","write")
                 //
-                .authorizedGrantTypes("password","reflesh_token")
+                .authorizedGrantTypes("password","refresh_token")
                 // tempo definido para o token
                 .accessTokenValiditySeconds(1800)
                 // tempo de vida do reflesh token
@@ -52,7 +52,7 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
                 // escopo usado para o acesso a api
                 .scopes("read")
                 //
-                .authorizedGrantTypes("password","reflesh_token")
+                .authorizedGrantTypes("password","refresh_token")
                 // tempo definido para o token
                 .accessTokenValiditySeconds(1800)
                 // tempo de vida do reflesh token
@@ -64,8 +64,9 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
     public void configure(AuthorizationServerEndpointsConfigurer endpoints) throws Exception {
         TokenEnhancerChain tokenEnhancerChain = new TokenEnhancerChain();
         tokenEnhancerChain.setTokenEnhancers(Arrays.asList(tokenEnhancerChain(),accessTokenConverter()));
-        endpoints.tokenStore(tokenStore())
-                .accessTokenConverter(accessTokenConverter())
+        endpoints
+                .tokenStore(tokenStore())
+                .tokenEnhancer(tokenEnhancerChain)
                 .reuseRefreshTokens(false)
                 .authenticationManager(authenticationManager);
     }
